@@ -13,7 +13,7 @@ const petRouter = require('./routes/pets.router');
 // Body parser middleware
 app.use(express.json());
 
-// Passport Session Configuration //
+// Passport Session Configuration // has to be AFTER middleware 
 app.use(sessionMiddleware);
 
 // start up passport sessions
