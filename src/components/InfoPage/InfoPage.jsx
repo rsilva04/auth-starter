@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 
 function InfoPage() {
   const dispatch = useDispatch();
@@ -12,18 +11,12 @@ function InfoPage() {
   }, []);
 
   const getPetList = () => {
-    axios.get('/api/pets')
-      .then(response => {
-        dispatch({type: 'SET_PET_LIST', payload: response.data})
-      }) 
-      .catch(error => {
-        console.error(error);
-        alert('Something went wrong.');
-      });
+dispatch({ type: 'FETCH_PET_LIST' })    
   }
 
   const addPet = (e) => {
     e.preventDefault();
+    dispatch({ type: 'ADD_PET', payload: { name: petName } })
     axios.post('/api/pets', { name: petName })
       .then(response => getPetList())
       .catch(error => {
